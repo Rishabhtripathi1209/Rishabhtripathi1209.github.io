@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}</style>
+<title>Rishabh Tripathi Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: resume as a node spec sheet — identity band on top, sidebar of verifiable facts (certs, skills), main column of experience. */
+:root {
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --ink: #141b2b;
+  --muted: #566176;
+  --line: #dde2ea;
+  --accent: #1f5fd1;
+  --accent-soft: #e6eefc;
+  --ok: #17845a;
+  --ok-soft: #e3f4ec;
+  --font-display: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e131d; --surface: #161d2b; --ink: #e8ecf3; --muted: #9aa5b8; --line: #283246;
+    --accent: #7aa7ff; --accent-soft: #1c2a45; --ok: #5fcf9c; --ok-soft: #15302a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e131d; --surface: #161d2b; --ink: #e8ecf3; --muted: #9aa5b8; --line: #283246;
+  --accent: #7aa7ff; --accent-soft: #1c2a45; --ok: #5fcf9c; --ok-soft: #15302a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 28px;
+}
+
+/* Identity band */
+.id {
+  display: grid;
+  gap: 14px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 12.5px; color: var(--ok);
+  background: var(--ok-soft); padding: 4px 10px; border-radius: 999px; width: fit-content;
+}
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+h1 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0; letter-spacing: -0.02em;
+}
+.role { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; margin: 0; color: var(--accent); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); font-size: 14px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  padding: 7px 14px; border-radius: 8px; font-weight: 500; font-size: 14px;
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.btn:hover { text-decoration: none; border-color: var(--accent); }
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; }
+.contact-label { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.contact-value { font-family: var(--font-mono); font-size: 13.5px; user-select: all; overflow-wrap: anywhere; }
+.copy {
+  font: inherit; font-size: 12.5px; padding: 3px 10px; border-radius: 6px; cursor: pointer;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+}
+.copy:hover, .copy:focus-visible { border-color: var(--accent); outline: none; }
+.project { display: grid; gap: 4px; }
+.project h3 { margin: 0; font-size: 15px; font-weight: 600; }
+.project p { margin: 0; max-width: 70ch; }
+.edu { display: grid; gap: 10px; }
+.edu-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; align-items: baseline; }
+.edu-row h3 { margin: 0; font-size: 14.5px; font-weight: 600; }
+.edu-row p { margin: 0; color: var(--muted); font-size: 13.5px; width: 100%; }
+
+.grid { display: grid; grid-template-columns: 340px 1fr; gap: 28px; align-items: start; }
+.grid > * { min-width: 0; }
+@media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+section { display: grid; gap: 14px; }
+h2 {
+  font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); margin: 0;
+}
+.col { display: grid; gap: 32px; }
+
+/* Certifications */
+.cert {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 14px 16px; display: grid; gap: 6px;
+}
+.cert.lead { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.cert-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.cert h3 { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35; text-wrap: balance; }
+.level {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-soft); padding: 2px 7px; border-radius: 5px; white-space: nowrap;
+}
+.cert dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 13px; }
+.cert dt { color: var(--muted); }
+.cert dd { margin: 0; font-family: var(--font-mono); font-size: 12.5px; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.verify { font-size: 13px; font-weight: 500; }
+.pending { border-style: dashed; color: var(--muted); font-size: 13.5px; }
+
+/* Skills */
+.skillset { display: grid; gap: 12px; }
+.skillset h3 { margin: 0 0 6px; font-size: 13.5px; font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font-size: 12.5px; padding: 3px 9px; border-radius: 6px;
+  background: var(--surface); border: 1px solid var(--line);
+}
+
+.older { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13.5px; display: grid; gap: 2px; }
+
+/* Main column */
+.summary p { margin: 0; max-width: 65ch; }
+.summary p + p { margin-top: 10px; }
+
+.job { display: grid; gap: 8px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.job:last-child { border-bottom: 0; padding-bottom: 0; }
+.job-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; }
+.job h3 { margin: 0; font-family: var(--font-display); font-size: 1.08rem; font-weight: 700; }
+.job .org { color: var(--accent); font-weight: 600; }
+.when { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.where { color: var(--muted); font-size: 13.5px; }
+.job ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 70ch; }
+.stack { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+
+footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 18px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: border-color .15s ease; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="id">
+    <span class="status">open to work · on-site / hybrid / remote</span>
+    <h1>Rishabh Tripathi</h1>
+    <p class="role">Cloud Infrastructure Engineer · Nutanix Certified Professional (NCP-MCI 7)</p>
+    <div class="meta">
+      <span>Delhi, India</span>
+      <span>4.5+ years engineering</span>
+      <span>Ex-Wipro, HARMAN</span>
+      <span>B.Tech, Computer Science</span>
+    </div>
+    <div class="contact">
+      <span class="contact-label">Email</span>
+      <span class="contact-value" id="email">tripathi.rishabh2882@gmail.com</span>
+      <button type="button" class="copy" id="copy-email" aria-label="Copy email address">Copy</button>
+    </div>
+    <div class="links">
+      <a class="btn primary" href="https://www.credly.com/users/rishabh-tripathi.83a070c7" target="_blank" rel="noopener">Verified badges on Credly ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/rishabh-tripathi1209" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </header>
+
+  <div class="grid">
+    <aside class="col">
+      <section aria-labelledby="h-certs">
+        <h2 id="h-certs">Certifications</h2>
+
+        <article class="cert lead">
+          <div class="cert-top">
+            <h3>Nutanix Certified Professional – Multicloud Infrastructure 7</h3>
+            <span class="level">NCP-MCI</span>
+          </div>
+          <dl>
+            <dt>Issued</dt><dd>Oct 2026</dd>
+            <dt>Expires</dt><dd>Oct 2029</dd>
+            <dt>ID</dt><dd>c24106ae-000f-4729-858d-326393cfd726</dd>
+          </dl>
+          <a class="verify" href="https://www.credly.com/badges/c24106ae-000f-4729-858d-326393cfd726" target="_blank" rel="noopener">Verify on Credly ↗</a>
+        </article>
+
+        <article class="cert">
+          <div class="cert-top">
+            <h3>Nutanix Certified Associate 7</h3>
+            <span class="level">NCA</span>
+          </div>
+          <dl>
+            <dt>Issued</dt><dd>Oct 2026</dd>
+            <dt>Expires</dt><dd>Oct 2029</dd>
+            <dt>ID</dt><dd>711c3e05-92e3-43c5-bb8c-88bd2464e994</dd>
+          </dl>
+          <a class="verify" href="https://www.credly.com/badges/711c3e05-92e3-43c5-bb8c-88bd2464e994" target="_blank" rel="noopener">Verify on Credly ↗</a>
+        </article>
+
+        <article class="cert">
+          <div class="cert-top">
+            <h3>Nutanix Enterprise Cloud Administration (ECA) 6.10</h3>
+            <span class="level">Course</span>
+          </div>
+          <dl><dt>Completed</dt><dd>Oct 2026 · Nutanix University</dd></dl>
+        </article>
+
+        <article class="cert">
+          <div class="cert-top">
+            <h3>Nutanix Hybrid Cloud Fundamentals (NHCF) 6.10</h3>
+            <span class="level">Course</span>
+          </div>
+          <dl><dt>Completed</dt><dd>Oct 2026 · Nutanix University</dd></dl>
+        </article>
+
+        <div class="cert pending">Two more Nutanix certifications in progress.</div>
+      </section>
+
+      <section aria-labelledby="h-skills">
+        <h2 id="h-skills">Skills</h2>
+        <div class="skillset">
+          <div>
+            <h3>Infrastructure &amp; virtualization</h3>
+            <div class="chips">
+              <span class="chip">Nutanix AOS</span><span class="chip">AHV</span><span class="chip">Prism Element</span>
+              <span class="chip">Prism Central</span><span class="chip">HCI</span><span class="chip">Virtualization</span>
+              <span class="chip">Hybrid &amp; multicloud</span><span class="chip">Data protection</span><span class="chip">Linux</span>
+            </div>
+          </div>
+          <div>
+            <h3>Cloud &amp; DevOps</h3>
+            <div class="chips">
+              <span class="chip">AWS EC2</span><span class="chip">Lambda</span><span class="chip">ECS</span><span class="chip">S3</span>
+              <span class="chip">IAM</span><span class="chip">Docker</span><span class="chip">Jenkins</span><span class="chip">GitHub Actions</span>
+              <span class="chip">systemd</span><span class="chip">Splunk</span><span class="chip">Dynatrace</span>
+            </div>
+          </div>
+          <div>
+            <h3>Automation &amp; backend</h3>
+            <div class="chips">
+              <span class="chip">Python</span><span class="chip">Java</span><span class="chip">FastAPI</span><span class="chip">Django</span><span class="chip">Flask</span><span class="chip">Spring Boot</span>
+              <span class="chip">REST APIs</span><span class="chip">Microservices</span><span class="chip">Event-driven systems</span>
+            </div>
+          </div>
+          <div>
+            <h3>Data &amp; AI</h3>
+            <div class="chips">
+              <span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">DynamoDB</span><span class="chip">Qdrant</span>
+              <span class="chip">RAG</span><span class="chip">Embeddings</span><span class="chip">Semantic search</span><span class="chip">TensorFlow / Keras</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="h-edu">
+        <h2 id="h-edu">Education</h2>
+        <div class="edu">
+          <div class="edu-row">
+            <h3>Inderprastha Engineering College</h3>
+            <span class="when">2018 – 2022</span>
+            <p>B.Tech, Computer Science and Engineering</p>
+          </div>
+          <div class="edu-row">
+            <h3>Rajkiya Sarvodaya Vidyalaya</h3>
+            <span class="when">2017</span>
+            <p>Senior Secondary (10+2)</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="h-older">
+        <h2 id="h-older">Earlier learning</h2>
+        <ul class="older">
+          <li>Software Architecture Foundations · LinkedIn, 2023</li>
+          <li>Programming for Everybody (Python), Python Basics</li>
+          <li>Python Project: Pillow, Tesseract, OpenCV</li>
+          <li>Apache Spark Structured Streaming with MongoDB · Coursera, 2023</li>
+          <li>Introduction to Programming Using Java · Coursera, 2022</li>
+          <li>Cybersecurity Essentials, Packet Tracer · Cisco Networking Academy, 2021</li>
+        </ul>
+      </section>
+    </aside>
+
+    <main class="col">
+      <section class="summary" aria-labelledby="h-summary">
+        <h2 id="h-summary">Summary</h2>
+        <p>Cloud infrastructure engineer focused on Nutanix hyperconverged and hybrid multicloud platforms. Certified Nutanix Professional (NCP-MCI 7) and Associate (NCA 7), working with clusters through Prism Element and Prism Central, AHV virtualization, storage and data protection, and workloads across on-prem and cloud.</p>
+        <p>4.5+ years of software engineering at Wipro, HARMAN, TechAhead and a Japan-based AI startup make me strong at automating and troubleshooting infrastructure: AWS cloud-native services, Docker and CI/CD pipelines, and root-cause analysis of production issues in distributed systems.</p>
+      </section>
+
+      <section aria-labelledby="h-exp">
+        <h2 id="h-exp">Experience</h2>
+
+        <article class="job">
+          <div class="job-head">
+            <h3>Freelance AI Engineer · <span class="org">株式会社InnovativeAI</span></h3>
+            <span class="when">Nov 2025 – Aug 2026</span>
+          </div>
+          <div class="where">Contract · Japan, remote</div>
+          <ul>
+            <li>Built APIs and services that generate video thumbnails from interview recordings and store media assets in cloud storage, for an AI interview platform used by hiring teams in Japan.</li>
+            <li>Sped up the search and interview management screens with thumbnail-based previews.</li>
+            <li>Integrated backend services with Python, FastAPI and microservices; delivered through GitHub issues, pull requests, code reviews and Agile.</li>
+            <li>Experimented with AI-driven interview workflows and structured candidate evaluation pipelines.</li>
+          </ul>
+          <div class="stack">Python · FastAPI · Microservices · Cloud storage · GitHub · Agile</div>
+        </article>
+
+        <article class="job">
+          <div class="job-head">
+            <h3>AI Software Engineer · <span class="org">TechAhead</span></h3>
+            <span class="when">Oct 2025</span>
+          </div>
+          <div class="where">Full-time · Noida, on-site</div>
+          <ul>
+            <li>Built AWS Lambda serverless pipelines that process large-scale YouTube medical transcripts and store embeddings in Qdrant for semantic retrieval.</li>
+            <li>Added validation and error handling to make AI output more reliable.</li>
+            <li>Debugged and optimised production services on EC2 with systemd.</li>
+          </ul>
+          <div class="stack">Python · AWS Lambda · EC2 · MongoDB Atlas · Qdrant · systemd · Git</div>
+        </article>
+
+        <article class="job">
+          <div class="job-head">
+            <h3>Software Developer I · <span class="org">Wipro</span></h3>
+            <span class="when">Nov 2024 – Sep 2025</span>
+          </div>
+          <div class="where">Full-time · Hyderabad, hybrid</div>
+          <ul>
+            <li>Cut system latency by 15% through SQL query optimisation, indexing and caching.</li>
+            <li>Containerised services with Docker and automated build, test and deploy with Jenkins and GitHub Actions.</li>
+            <li>Deployed cloud-native applications on AWS EC2, Lambda, ECS, S3 and IAM.</li>
+            <li>Resolved complex production issues in distributed systems through log analysis and root-cause analysis, with permanent fixes.</li>
+          </ul>
+          <div class="stack">Python · Java · FastAPI · Django · PostgreSQL · MongoDB · DynamoDB · Docker · AWS</div>
+        </article>
+
+        <article class="job">
+          <div class="job-head">
+            <h3>Software Engineer I · <span class="org">HARMAN International</span></h3>
+            <span class="when">Feb 2022 – Jun 2024</span>
+          </div>
+          <div class="where">Full-time · Bengaluru, hybrid</div>
+          <ul>
+            <li>Built backend systems and APIs for voice-enabled features on the Tata Gen3 automotive platform, with QA, product and embedded teams.</li>
+            <li>Kept critical services at 99.9% uptime by debugging distributed-system issues and monitoring production logs for bottlenecks.</li>
+            <li>Implemented CI/CD pipelines that cut release cycles by 30%.</li>
+            <li>Reduced production bugs by 25% with unit and integration tests (JUnit, Mockito).</li>
+            <li>Built high-throughput RESTful services in Spring Boot and improved API response times with caching.</li>
+          </ul>
+          <div class="stack">Java · Android · Spring Boot · JUnit · Mockito · Git · Gerrit · CI/CD</div>
+        </article>
+      </section>
+
+      <section aria-labelledby="h-projects">
+        <h2 id="h-projects">Projects</h2>
+        <article class="project">
+          <h3>Medical AI Knowledge Base</h3>
+          <p>Production RAG system on AWS serverless workflows, with embeddings and vector search over medical transcripts.</p>
+          <div class="stack">AWS Lambda · Qdrant · Python</div>
+        </article>
+        <article class="project">
+          <h3>AI Interview Platform Features</h3>
+          <p>Automated video thumbnail generation, media storage workflows and faster search pages for an interview platform used by international hiring teams.</p>
+          <div class="stack">Python · FastAPI · Cloud storage</div>
+        </article>
+        <article class="project">
+          <h3>Plant Disease Detection Web App</h3>
+          <p>CNN image classifier trained on a Kaggle dataset, served from a Django app with image preprocessing and live inference, deployed on Heroku.</p>
+          <div class="stack">TensorFlow · Keras · Django · Heroku</div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <footer>Every Nutanix certification above links to its verified Credly record.</footer>
+</div>
+<script>
+(function () {
+  var btn = document.getElementById('copy-email');
+  var val = document.getElementById('email');
+  if (!btn || !val) return;
+  btn.addEventListener('click', function () {
+    var text = val.textContent.trim();
+    function selectIt() {
+      var r = document.createRange(); r.selectNodeContents(val);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selected';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; }, selectIt);
+    } catch (e) { selectIt(); }
+    setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+  });
+})();
+</script>
+
+</body>
+</html>
